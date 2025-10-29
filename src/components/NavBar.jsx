@@ -50,7 +50,7 @@ export default function Navbar() {
             )}
               {user.role === "admin" && (
                 <Link to="/admin" className="hover:text-[#f4c95d] transition">
-                  Admin
+                  Dashboard
                 </Link>
               )}
               <button
@@ -114,7 +114,7 @@ export default function Navbar() {
                   className="block hover:text-[#f4c95d]"
                   onClick={() => setMenuOpen(false)}
                 >
-                  Admin
+                  Dashboard
                 </Link>
               )}
               <button

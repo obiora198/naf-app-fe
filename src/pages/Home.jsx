@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axiosClient from "../api/axios";
 import LodgeCard from "../components/LodgeCard";
 import { ShieldCheck, BedDouble, MapPin, Users } from "lucide-react";
+import { LoadingSpinner } from "../components/Loader";
 
 export default function Home() {
   const { data: lodges, isLoading } = useQuery({
@@ -9,7 +10,7 @@ export default function Home() {
     queryFn: async () => (await axiosClient.get("/lodges")).data,
   });
 
-  if (isLoading) return <p className="text-center py-10">Loading lodges...</p>;
+  if (isLoading) return <LoadingSpinner text="Loading lodges..." />;
 
   return (
     <div className="bg-naf-light">
@@ -28,7 +29,7 @@ export default function Home() {
 
           <a
             href="#lodges"
-            className="bg-[#f4c95d] text-[#0b1b2a] font-semibold px-8 py-3 rounded-lg hover:bg-[#f6d77a] transition-transform duration-200 hover:scale-105 shadow-lg"
+            className="w-fit bg-naf-gold text-naf-dark font-semibold px-8 py-3 rounded-lg hover:bg-[#f6d77a] transition-transform duration-200 hover:scale-105 shadow-lg"
           >
             Explore Lodges
           </a>
@@ -121,7 +122,7 @@ export default function Home() {
         <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-naf-dark">
           Explore Available Lodges
         </h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2">
           {lodges?.map((lodge) => (
             <LodgeCard key={lodge._id} lodge={lodge} />
           ))}
