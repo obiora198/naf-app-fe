@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { InlineSpinner } from "../components/Loader";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -66,7 +67,13 @@ export default function Login() {
               : "bg-[#f4c95d] hover:bg-[#f6d77a] text-naf-dark"
           }`}
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? (
+            <>
+              <InlineSpinner /> Logging in...
+            </>
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
     </div>

@@ -1,20 +1,24 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { InlineSpinner } from "../components/Loader";
 
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false);
   const { register } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await register(form.name, form.email, form.password);
       navigate("/");
     } catch {
       alert("Registration failed");
     }
+    setLoading(false);
   };
 
   return (
@@ -52,7 +56,13 @@ export default function Register() {
           type="submit"
           className="bg-blue-700 w-full text-white py-2 rounded-lg hover:bg-blue-800"
         >
-          Register
+          {loading ? (
+            <>
+              <InlineSpinner /> Registering... 
+              </>
+              ) : (
+                "Register"
+              )}
         </button>
       </form>
     </div>
