@@ -1,11 +1,5 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
-
-if (!MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable.");
-}
-
 // Use a cached connection to avoid redundant connections in serverless environments
 const globalWithMongoose = global as typeof globalThis & {
   mongoose: { conn: typeof mongoose | null; promise: Promise<typeof mongoose> | null };
@@ -16,6 +10,12 @@ if (!globalWithMongoose.mongoose) {
 }
 
 async function connectDB() {
+  const MONGODB_URI = process.env.MONGODB_URI;
+
+  if (!MONGODB_URI) {
+    throw new Error("Please define the MONGODB_URI environment variable.");
+  }
+
   const cached = globalWithMongoose.mongoose;
 
   if (cached.conn) return cached.conn;
