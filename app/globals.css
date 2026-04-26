@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FAF8F5;
+  --foreground: #0F172A;
+  --gold: #C9A84C;
+  --gold-light: #E0CC8A;
+  --cream: #FAF8F5;
+  --cream-dark: #F0ECE4;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-xl border border-white/40 shadow-premium;
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, #C9A84C 0%, #E0CC8A 50%, #C9A84C 100%);
+  }
+
+  .gold-text {
+    background: linear-gradient(135deg, #C9A84C, #E0CC8A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .premium-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.7) 0%,
+      rgba(15, 23, 42, 0.3) 40%,
+      rgba(15, 23, 42, 0.5) 100%
+    );
+  }
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-light);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove default tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom selection */
+::selection {
+  background-color: #C9A84C;
+  color: #0F172A;
+}
